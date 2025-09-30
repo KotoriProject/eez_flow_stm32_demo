@@ -52,7 +52,11 @@
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
 /* USER CODE BEGIN PFP */
-
+int _gettimeofday(struct timeval *tv, void *tzvp) {
+  UNUSED(tv);
+  UNUSED(tzvp);
+  return 0;
+}
 /* USER CODE END PFP */
 
 /* Private user code ---------------------------------------------------------*/
