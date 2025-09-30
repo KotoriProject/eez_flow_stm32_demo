@@ -45,15 +45,17 @@ target_link_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined library search paths
 )
 
+aux_source_directory(extension/UI/src/ui UI_SRC)
 # Add sources to executable
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user sources here
-    
+    ${UI_SRC}
 )
 
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
+    extension/UI/src/ui
 )
 
 # Add project symbols (macros)
@@ -67,3 +69,22 @@ target_link_libraries(${CMAKE_PROJECT_NAME}
 
     # Add user defined libraries
 )
+
+add_subdirectory(${CMAKE_SOURCE_DIR}/extension/lvgl)
+target_link_libraries(${CMAKE_PROJECT_NAME}
+    lvgl
+)
+
+add_definitions(-DEEZ_FOR_LVGL) #使用EEZ FLOW
+add_subdirectory(extension/eez-framework) #添加子目录cmake
+target_link_libraries(${CMAKE_PROJECT_NAME}
+        lvgl
+        eez-framework
+)
+target_link_libraries(eez-framework
+        # 添加lvgl库到eez
+        lvgl
+)
+
+# 添加 extension/lvgl 作为全局 include 路径
+include_directories(${CMAKE_SOURCE_DIR}/extension)

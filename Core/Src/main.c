@@ -22,7 +22,10 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+// lvgl inc
+#include "lvgl.h"
+// eez UI inc
+#include "extension/UI/src/ui/ui.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -86,13 +89,18 @@ int main(void)
 
   /* Initialize all configured peripherals */
   /* USER CODE BEGIN 2 */
-
+  // lvgl init
+  lv_init();
+  // eez UI init
+  ui_init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+    ui_tick();
+    lv_task_handler();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
